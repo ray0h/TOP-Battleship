@@ -1,11 +1,11 @@
-const Ship = ( position ) => {
+const Ship = (id, position) => {
   
   let hits = [];
 
   function hit(pos) {
     if (position.includes(pos)) {
       hits.push(pos);
-    }
+    };
   };
 
   function isSunk() {
@@ -13,6 +13,7 @@ const Ship = ( position ) => {
   };
 
   return {
+    id,
     length: position.length,
     hits,
     hit,
