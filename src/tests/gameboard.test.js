@@ -29,6 +29,8 @@ describe("testing Gameboard function factory", () => {
     test.todo("the right number ofships are placed onto the board")
   });
 
+    test.todo("ships can not be placed off board")
+
   describe("Gameboard has a method receiveAttack that records hits/misses to board", () => {
     test("has a method - receiveAttack", () => {
       expect(Object.keys(Gameboard())).toContain("receiveAttack");
