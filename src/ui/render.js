@@ -1,6 +1,8 @@
+import dragHandlers from "./dragHandlers";
+
 const render = () => {
 
-  const initializeBoards = (id1, id2) => {
+  const initializeBoards = () => {
     const playerOneBoard = document.getElementById("p1Board");
     const playerTwoBoard = document.getElementById("p2Board");
 
@@ -12,6 +14,11 @@ const render = () => {
       let newDiv2 = document.createElement("div");
       newDiv1.id = "p1Board-"+i; 
       newDiv1.classList.add("square");
+      newDiv1.ondrop=dragHandlers().handleDrop;
+      newDiv1.ondragover=dragHandlers().handleDragOver;
+      newDiv1.ondragenter=dragHandlers().handleDragEnter;
+      newDiv1.ondragleave=dragHandlers().handleDragLeave;
+      newDiv1.ondragend=dragHandlers().handleDragEnd;
       newDiv2.id = "p2Board-"+i;
       newDiv2.classList.add("empty", "square");
       playerOneBoard.appendChild(newDiv1);
@@ -43,6 +50,7 @@ const render = () => {
         const newDiv = document.createElement("div");
         newDiv.classList.add("square");
         newDiv.id = `p1Board-${ship[i]}sh`;
+        newDiv.onmouseenter = dragHandlers().mouseEnter;
         newShip.appendChild(newDiv);
       };
 
@@ -62,6 +70,8 @@ const render = () => {
         newShip.style.width = "22px";
         newShip.style.gridTemplateRows = `repeat(${ship.length}, 20px)`;
       };
+      newShip.ondragstart=dragHandlers().handleDragStart;
+      newShip.ondblclick=rotateShip;
 
       let position = document.getElementById(`p1Board-${ship[0]}`);
       position.appendChild(newShip);
@@ -94,8 +104,8 @@ const render = () => {
   }; 
 
   const rotateShip = (e) => {
-    // let id = e.target.parentNode.id;
-    let id = e.target.id;
+    let id = e.target.parentNode.id;
+    // let id = e.target.id;
     let ship = document.getElementById(id);
     let length = id.slice(6,7);
     let orient = id.slice(7,8);
@@ -113,7 +123,6 @@ const render = () => {
     };
     
     possSqs = squares.map((sq, index) => loc+index*params.factor);
-
     if (isLegalRotation(possSqs)) {
       ship.style.height = params.height;
       ship.style.width = params.width;

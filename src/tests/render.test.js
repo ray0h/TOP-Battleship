@@ -141,7 +141,7 @@ describe("render ui, rotateShip", () => {
       [57, 58, 59],
     ];
     render().makeDraggableShips(shipArray);
-    let ship = document.querySelector(".dragMe");
+    let ship = document.getElementById("p1Board-57sh");
 
     const event = new MouseEvent('dblclick', 
     {
@@ -150,10 +150,10 @@ describe("render ui, rotateShip", () => {
       'cancelable': true
     });
     
-    ship.addEventListener('dblclick', render().rotateShip, true);
+    // ship.addEventListener('dblclick', render().rotateShip, true);
     ship.dispatchEvent(event);
 
-    let squares = [...ship.childNodes];
+    let squares = [...ship.parentNode.childNodes];
     let coords = squares.map(square => 
       Number(square.id.match(/^((?!sh).)+/)[0].slice(8))
     );
@@ -168,7 +168,7 @@ describe("render ui, rotateShip", () => {
       [37, 47, 57],
     ];
     render().makeDraggableShips(shipArray);
-    let ship = document.querySelector(".dragMe");
+    let ship = document.getElementById("p1Board-47sh");
 
     const event = new MouseEvent('dblclick', 
     {
@@ -177,10 +177,10 @@ describe("render ui, rotateShip", () => {
       'cancelable': true
     });
     
-    ship.addEventListener('dblclick', render().rotateShip, true);
+    // ship.addEventListener('dblclick', render().rotateShip, true);
     ship.dispatchEvent(event);
 
-    let squares = [...ship.childNodes];
+    let squares = [...ship.parentNode.childNodes];
     let coords = squares.map(square => 
       Number(square.id.match(/^((?!sh).)+/)[0].slice(8))
     );
@@ -189,7 +189,6 @@ describe("render ui, rotateShip", () => {
     expect(coords[2]).toBe(39);
   });
 
-
   test("rotation that overlaps with another ship does not execute", () => {
     render().initializeBoards();
     let shipArray = [
@@ -197,7 +196,7 @@ describe("render ui, rotateShip", () => {
       [47, 48, 49]
     ];
     render().makeDraggableShips(shipArray);
-    let ship = document.querySelector(".dragMe");
+    let ship = document.getElementById("p1Board-37sh");
 
     const event = new MouseEvent('dblclick', 
     {
@@ -209,7 +208,7 @@ describe("render ui, rotateShip", () => {
     ship.addEventListener('dblclick', render().rotateShip, true);
     ship.dispatchEvent(event);
 
-    let squares = [...ship.childNodes];
+    let squares = [...ship.parentNode.childNodes];
     let coords = squares.map(square => 
       Number(square.id.match(/^((?!sh).)+/)[0].slice(8))
     );
@@ -225,7 +224,7 @@ describe("render ui, rotateShip", () => {
       [94, 95, 96, 97],
     ];
     render().makeDraggableShips(shipArray);
-    let ship = document.querySelector(".dragMe");
+    let ship = document.getElementById("p1Board-94sh");
 
     const event = new MouseEvent('dblclick', 
     {
@@ -237,7 +236,7 @@ describe("render ui, rotateShip", () => {
     ship.addEventListener('dblclick', render().rotateShip, true);
     ship.dispatchEvent(event);
 
-    let squares = [...ship.childNodes];
+    let squares = [...ship.parentNode.childNodes];
     let coords = squares.map(square => 
       Number(square.id.match(/^((?!sh).)+/)[0].slice(8))
     );
