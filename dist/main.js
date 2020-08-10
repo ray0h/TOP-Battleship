@@ -98,15 +98,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ships__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ships */ "./src/factories/ships.js");
 
 
-const Gameboard = () => {
+const Gameboard = (boardId) => {
 
   let shipArray = [];
   let boardArray = Array(100);
 
-  function placeShip(coord) {
+  function placeShip(coords) {
     let isAlreadyOccupied = false;
     
-    coord.forEach(coord => {
+    coords.forEach(coord => {
       if (boardArray[coord]) {
         isAlreadyOccupied = true;
       };
@@ -114,9 +114,9 @@ const Gameboard = () => {
 
     if (!isAlreadyOccupied) {
       let id = shipArray.length + 1;
-      let newShip = Object(_ships__WEBPACK_IMPORTED_MODULE_0__["default"])(id, coord);
+      let newShip = Object(_ships__WEBPACK_IMPORTED_MODULE_0__["default"])(id, coords);
       shipArray.push(newShip);
-      coord.forEach(coord => boardArray[coord] = id);
+      coords.forEach(coord => boardArray[coord] = id);
     };
   };
 
@@ -137,6 +137,7 @@ const Gameboard = () => {
   };
 
   return {
+    boardId,
     boardArray,
     shipArray,
     placeShip,

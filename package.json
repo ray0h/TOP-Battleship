@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watch player.test.js"
+    "test": "jest --watch render.test.js"
   },
   "author": "",
   "license": "ISC",

@@ -1,21 +1,27 @@
-import Gameboard from "../components/gameboard";
-import Ship from "../components/ships";
+import Gameboard from "../factories/gameboard";
+import Ship from "../factories/ships";
 
 describe("testing Gameboard function factory", () => {
   test("returns a gameboard object", () => {
-    expect(typeof(Gameboard() )).toBe("object");
+    expect(typeof(Gameboard("board1") )).toBe("object");
+  });
+
+  test("has a board id key", () => {
+    const mockGameboard = Gameboard("board1");
+    expect(Object.keys(mockGameboard)).toContain("boardId");
+    expect(mockGameboard.boardId).toBe("board1");
   });
 
   describe("Gameboard can place ships onto board", () => {
     test("can place a ship by using Ship factory and a set of coordinates", () => {
-      let mockGameboard = Gameboard();
+      let mockGameboard = Gameboard("board1");
       mockGameboard.placeShip([1,2]);
       expect(mockGameboard.boardArray[1]).toBe(1);
       expect(mockGameboard.boardArray[2]).toBe(1);
     });
     
-    test("ships can not overlap on top of one another", () => {
-      let mockGameboard = Gameboard();
+    test("ships will not overlap on top of one another", () => {
+      let mockGameboard = Gameboard("board1");
       mockGameboard.placeShip([1,2]);
       mockGameboard.placeShip([1,2,3,4]);
       expect(mockGameboard.boardArray[1]).toBe(1);
@@ -24,20 +30,24 @@ describe("testing Gameboard function factory", () => {
       expect(mockGameboard.boardArray[4]).toBe(undefined);
     });
 
-    test.todo("ships can be placed horizontally or vertically");
+    test("ships can be placed vertically", () => {
+      let mockGameboard = Gameboard("board1");
+      mockGameboard.placeShip([31, 41, 51, 61]);
+      expect(mockGameboard.boardArray[31]).toBe(1);
+      expect(mockGameboard.boardArray[41]).toBe(1);
+      expect(mockGameboard.boardArray[51]).toBe(1);
+      expect(mockGameboard.boardArray[61]).toBe(1);
+    });
 
-    test.todo("the right number ofships are placed onto the board")
   });
-
-    test.todo("ships can not be placed off board")
 
   describe("Gameboard has a method receiveAttack that records hits/misses to board", () => {
     test("has a method - receiveAttack", () => {
-      expect(Object.keys(Gameboard())).toContain("receiveAttack");
+      expect(Object.keys(Gameboard("board1"))).toContain("receiveAttack");
     });
     
     test("receiveAttack method miss records it on gameboard", () => {
-      let mockGameboard = Gameboard(); 
+      let mockGameboard = Gameboard("board1"); 
       mockGameboard.placeShip([1,2,3]);
       mockGameboard.receiveAttack(4);
 
@@ -45,7 +55,7 @@ describe("testing Gameboard function factory", () => {
     });
     
     test("receiveAttack method hit records hit and sends hit coordinate to relevant ship object", () => {
-      let mockGameboard = Gameboard(); 
+      let mockGameboard = Gameboard("board1"); 
       mockGameboard.placeShip([1,2,3]);
       mockGameboard.placeShip([11,12])
       mockGameboard.receiveAttack(1);
@@ -61,7 +71,7 @@ describe("testing Gameboard function factory", () => {
   describe("Gameboard tracks ships", () => {
 
     test("Gameboard tracks multiple ships and is aware when a ship is sunk", () => {
-      let mockGameboard = Gameboard();
+      let mockGameboard = Gameboard("board1");
       mockGameboard.placeShip([1,2,3]);
       mockGameboard.placeShip([11,21,31]);
       mockGameboard.placeShip([5,6,7,8]);
@@ -75,7 +85,7 @@ describe("testing Gameboard function factory", () => {
     });
 
     test("Gameboard tracks multiple ships and recognizes when all ships are sunk", () => {
-      let mockGameboard = Gameboard();
+      let mockGameboard = Gameboard("board1");
       mockGameboard.placeShip([1,2]);
       mockGameboard.placeShip([5,6]);
       mockGameboard.placeShip([11,12]);
