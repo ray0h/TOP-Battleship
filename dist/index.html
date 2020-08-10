@@ -10,13 +10,15 @@
   <div class="container">
     <h2>Battleship</h2>
     <div id="boardContainer" class="flex-row">
-      <div id="p1Board" class="grid"></div>
-      <div id="p2Board" class="grid"></div>
+      <div class = "flex-col">
+        <div id="p1Board" class="grid"></div>
+        <div class="pLabel"><p>player1</p></div>
+      </div>
+      <div class = "flex-col">
+        <div id="p2Board" class="grid"></div>
+        <div class="pLabel"><p>player2</p></div>
+      </div>
     </div>
-    <div class="flex-row">
-      <div class="pLabel"><p>player1</p></div>
-      <div class="pLabel"><p>player2</p></div>
-    </div> 
     <button id="gameBtn">Play Game</button>
     <h3 id="message">Place Ships (dbl click to rotate)</h3>
   </div>

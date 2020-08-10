@@ -62,13 +62,13 @@ const render = () => {
       newShip.style.gridGap = "1px";
 
       if (orientation === "h") {
-        newShip.style.height = "22px";
-        newShip.style.width = `${ship.length * 21}px`; 
-        newShip.style.gridTemplateColumns = `repeat(${ship.length}, 20px)`;
+        newShip.style.height = "27px";
+        newShip.style.width = `${ship.length * 26}px`; 
+        newShip.style.gridTemplateColumns = `repeat(${ship.length}, 25px)`;
       } else if(orientation === "v") {
-        newShip.style.height = `${ship.length * 21}px`;
-        newShip.style.width = "22px";
-        newShip.style.gridTemplateRows = `repeat(${ship.length}, 20px)`;
+        newShip.style.height = `${ship.length * 26}px`;
+        newShip.style.width = "27px";
+        newShip.style.gridTemplateRows = `repeat(${ship.length}, 25px)`;
       };
       newShip.ondragstart=dragHandlers().handleDragStart;
       newShip.ondblclick=rotateShip;
@@ -114,10 +114,10 @@ const render = () => {
     let possSqs; 
 
     let params = {
-      height : (orient === "h") ? `${length * 21}px` : "22px",
-      width : (orient === "h") ? "22px" : `${length * 21}px`,
-      gridRows : (orient === "h") ? `repeat(${length}, 20px)` : "",
-      gridCols : (orient === "h") ? "" : `repeat(${length}, 20px)`,
+      height : (orient === "h") ? `${length * 26}px` : "27px",
+      width : (orient === "h") ? "27px" : `${length * 26}px`,
+      gridRows : (orient === "h") ? `repeat(${length}, 25px)` : "",
+      gridCols : (orient === "h") ? "" : `repeat(${length}, 25px)`,
       newOrient : (orient === "h") ? "v" : "h",
       factor : (orient === "h") ? 10 : 1
     };
