@@ -1,5 +1,5 @@
-import Player from "../components/player";
-import Gameboard from "../components/gameboard";
+import Player from "../factories/player";
+import Gameboard from "../factories/gameboard";
 
 describe("Player", () => {
   test("Player exists", () => {

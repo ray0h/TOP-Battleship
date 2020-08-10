@@ -50,7 +50,7 @@ const render = () => {
         const newDiv = document.createElement("div");
         newDiv.classList.add("square");
         newDiv.id = `p1Board-${ship[i]}sh`;
-        newDiv.onmouseenter = dragHandlers().mouseEnter;
+        newDiv.onmouseenter = dragHandlers().handleMouseEnter;
         newShip.appendChild(newDiv);
       };
 

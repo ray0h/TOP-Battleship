@@ -1,4 +1,4 @@
-import Ship from "../components/ships";
+import Ship from "../factories/ships";
 
 describe("testing Ship function factory", () => {
 

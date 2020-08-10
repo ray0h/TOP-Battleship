@@ -19,10 +19,10 @@ const dragHandlers = () => {
   };
 
   const handleDragStart = (e) => {
-    this.style.opacity = "0.4";
+    e.target.style.opacity = "0.4";
     e.dataTransfer.setData("shipId", e.target.id.match(/^((?!offset\d+).)+/)[0]);
     e.dataTransfer.setData("length", Number(e.target.id.slice(6,7) ));
-    e.dataTransfer.setData("orient", e.target.id.slice(7,8) );
+    e.dataTransfer.setData("orientation", e.target.id.slice(7,8) );
     e.dataTransfer.setData("location", Number(e.target.id.slice(8) ));
     e.dataTransfer.setData("offset", Number(e.target.id.match(/offset\d+/g)[0].slice(6)));
     e.target.id = e.target.id.match(/^((?!offset\d+).)+/)[0];
@@ -47,21 +47,21 @@ const dragHandlers = () => {
     let dragged = document.getElementById(draggedId);
     
     // check dragged ship doesnt overlap with another ship (except itself)
-    const orient = e.dataTransfer.getData("orient");
+    const orientation = e.dataTransfer.getData("orientation");
     const offset = e.dataTransfer.getData("offset");
 
     let current = e.target.id.match(/^((?!sh).)+/g)[0]
-    let spot = Number(current.slice(7));
-    let off = current.slice(0,7)+(spot-Number(offset))
+    let spot = Number(current.slice(8));
+    let offsetValue = current.slice(0,8)+(spot-Number(offset))
 
     // const dropArea = document.getElementById(e.target.id.match(/^((?!sh).)+/g));
-    const dropArea = document.getElementById(off);
+    const dropArea = document.getElementById(offsetValue);
     const squares = [...dragged.childNodes];
     const currSqs = squares.map(sq => sq.id);
     const possSqs = squares.map((sq, index) => 
-      (orient === "h") 
-        ? `board1-${Number(dropArea.id.slice(7)) + index}sh`
-        : `board1-${Number(dropArea.id.slice(7)) + index*10}sh`
+      (orientation === "h") 
+        ? `p1Board-${Number(dropArea.id.slice(8)) + index}sh`
+        : `p1Board-${Number(dropArea.id.slice(8)) + index*10}sh`
       );
     const noOverlap = possSqs
       .map(sq => (document.getElementById(sq) === null) || currSqs.includes(sq))
@@ -76,12 +76,12 @@ const dragHandlers = () => {
     const newCoordsValid = withinGrid && noWrap;
     
     // do not append if dropping on current square or does not meet above conditions
-    let loc = e.dataTransfer.getData("location");
-    if ((e.target.id !== `board1-${loc}`) && newCoordsValid && noOverlap) {
+    let location = e.dataTransfer.getData("location");
+    if ((e.target.id !== `p1Board-${location}`) && newCoordsValid && noOverlap) {
       dropArea.appendChild(dragged);
 
       // rename ship id/square id's based on new location
-      dragged.id = dragged.id.slice(0,8)+Number(dropArea.id.slice(7));
+      dragged.id = dragged.id.slice(0,8)+Number(dropArea.id.slice(8));
       squares.forEach((sq, index) => sq.id = possSqs[index]);
     };
   };
