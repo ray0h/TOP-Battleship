@@ -59,17 +59,17 @@ const dragHandlers = () => {
     const squares = [...dragged.childNodes];
     const currSqs = squares.map(sq => sq.id);
     const possSqs = squares.map((sq, index) => 
-      (orientation === "h") 
-        ? `p1Board-${Number(dropArea.id.slice(8)) + index}sh`
-        : `p1Board-${Number(dropArea.id.slice(8)) + index*10}sh`
-      );
+    (orientation === "h") 
+    ? `p1Board-${Number(dropArea.id.slice(8)) + index}sh`
+    : `p1Board-${Number(dropArea.id.slice(8)) + index*10}sh`
+    );
     const noOverlap = possSqs
       .map(sq => (document.getElementById(sq) === null) || currSqs.includes(sq))
       .every(el => el);
 
     // check if dragged ship remains on the grid
-    const squareIds = possSqs.map(sq => Number(sq.match(/^((?!sh).)+/g).slice(7)));
-    const withinGrid = squareIds.every(el => el < 100);
+    const squareIds = possSqs.map(sq => Number(sq.match(/^((?!sh).)+/g)[0].slice(8)));
+    const withinGrid = squareIds.every(el => (el < 100 && el >= 0));
     const modArr = squareIds.map(el => el % 10);
     const sortArr = squareIds.map(el => el % 10).sort();
     const noWrap = (JSON.stringify(modArr) === JSON.stringify(sortArr));

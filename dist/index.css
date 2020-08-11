@@ -15,9 +15,27 @@ body {
 }
 
 .flex-row {
-  width: 600px;
   display: flex;
   justify-content: space-between;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(10, var(--length));
+  grid-template-rows: repeat(10, var(--length));
+  grid-gap: 1px;
+}
+
+.grid-row {
+  display: grid;
+  grid-template-columns: repeat(11, var(--length));
+  grid-gap: 1px;
+}
+
+.grid-col {
+  display: grid;
+  grid-template-rows: repeat(10, var(--length));
+  grid-gap: 1px;
 }
 
 .flex-col {
@@ -35,23 +53,30 @@ body {
   line-height: var(--length);
 }
 
+.coord {
+  width: var(--length);
+  height: var(--length);
+ /*  border: 1px solid #333; */
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  line-height: var(--length);
+}
+
 .empty:hover {
   background-color: rgb(164, 243, 164)
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(10, var(--length));
-  grid-template-rows: repeat(10, var(--length));
-  grid-gap: 1px;
+.width600 {
+  width: 600px;
 }
 
 .ship {
-  background-color: rgb(72, 153, 219)
+  background-color: lightblue
 }
 
 .miss {
-  background-color:#ccc;
+  background-color:#ddd;
 }
 
 .hit {
@@ -76,8 +101,8 @@ body {
   text-align: center;
 }
 
-@media (max-width: 550px) {
-  .flex-row {
+@media (max-width: 570px) {
+  #boardContainer {
     flex-direction: column;
   }
 }
